@@ -1,0 +1,15 @@
+<h2>本のタイトル</h2>
+<p><%= @book.title %></p>
+
+<h2>感想</h2>
+<p><%= @book.body %></p>
+
+<h2>画像</h2>
+<% if @book.image.attached? %>
+  <%= image_tag @book.image, size: "300x300" %>
+<% else %>
+  <%= image_tag 'no_image', size: "300x300" %>
+<% end
+<p>投稿ユーザー画像：<%= image_tag @book.user.get_profile_image(100,100) %></p>
+
+<%= link_to "編集", edit_book_path(@book.id) %>
