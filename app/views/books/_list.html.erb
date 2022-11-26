@@ -1,11 +1,17 @@
-<% book.each do |book| %>
-<div>
-  <%= link_to book_path(book.id) do %>
-    <%= image_tag book.get_image %>
-  <% end %>
-  <p>投稿ユーザー画像：<%= image_tag book.user.get_profile_image(100,100) %></p>
-  <p>本のタイトル ：<%= book.title %></p>
-  <p>感想：<%= book.body %></p>
-  <p>ユーザーネーム：<%= book.user.name %></p>
-</div>
-<% end %>
+<h1>Books</h1>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Body</th>
+  </tr>
+    <tbody>
+      <% books.each do |book| %>
+      <tr>
+        <td><span><%= image_tag book.user.get_profile_image(100,100) %></span></td>
+        <td><span><%= book.user.name %></span></td>
+        <td><span><%= link_to book.title, book_path(book.id) %></span></td>
+        <td><span><%= book.body %></span></td>
+      </tr>
+      <% end %>
+    </tbody>
+</table>

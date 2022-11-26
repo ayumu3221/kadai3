@@ -1,15 +1,35 @@
-<h2>本のタイトル</h2>
-<p><%= @book.title %></p>
+<%= flash[:notice] %>
+<div class="container px-5 px-sm-0">
+<div class="row">
+<%= render "users/info", user: @book.user, book: @b %>
 
-<h2>感想</h2>
-<p><%= @book.body %></p>
-
-<h2>画像</h2>
-<% if @book.image.attached? %>
-  <%= image_tag @book.image, size: "300x300" %>
-<% else %>
-  <%= image_tag 'no_image', size: "300x300" %>
-<% end
-<p>投稿ユーザー画像：<%= image_tag @book.user.get_profile_image(100,100) %></p>
-
-<%= link_to "編集", edit_book_path(@book.id) %>
+<div class="col-md-8 offset-md-1">
+<h2>Book detail</h2>
+<table class="table">
+  <tbody>
+    <tr>
+      <td>
+        <%= link_to user_path(@book.user.id) do %>
+        
+          <%= image_tag @book.user.get_profile_image(100,100) %>
+          <%= @book.user.name %>
+        <% end %>       
+      </td>
+      <td><%= link_to @book.title, book_path(@book.id)  %></td>
+      <td><%= @book.body %></td>
+      <td>
+        <% if @book.user == current_user %>
+          <%= link_to "Edit", edit_book_path(@book.id), class: "btn btn-sm btn-success" %>
+        <% end %>
+      </td>
+      <td>
+        <% if @book.user == current_user %>
+          <%= link_to "Destroy", book_path(@book), method: :delete, class: "btn btn-sm btn-danger" %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
